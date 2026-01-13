@@ -181,7 +181,9 @@ const ContactUs = () => {
                 <div>
                   <p className="font-medium">Email</p>
                   <p className="text-gray-600 dark:text-gray-300">
-                    info@agrismart.com
+                    mdmonaz0178@gmail.com
+                    <p>221902170@student.green.edu.bd</p>
+                    <p>jibonbhuiyan700@gmail.com</p>
                   </p>
                 </div>
               </div>
@@ -190,7 +192,7 @@ const ContactUs = () => {
                 <div>
                   <p className="font-medium">Phone</p>
                   <p className="text-gray-600 dark:text-gray-300">
-                    +1 (555) 123-4567
+                    +880 1943031373
                   </p>
                 </div>
               </div>
@@ -199,11 +201,9 @@ const ContactUs = () => {
                 <div>
                   <p className="font-medium">Address</p>
                   <p className="text-gray-600 dark:text-gray-300">
-                    123 AgriTech Boulevard
+                    Khilkhet , Dhaka
                     <br />
-                    Innovation District
-                    <br />
-                    San Francisco, CA 94107
+                    Dhaka,
                   </p>
                 </div>
               </div>

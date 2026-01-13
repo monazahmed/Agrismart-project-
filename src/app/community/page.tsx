@@ -42,10 +42,10 @@ interface ApiPost {
 
 const formatTime = (isoString: string) => {
   const date = new Date(isoString);
-  return date.toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'short', 
-    day: 'numeric' 
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
   });
 };
 
@@ -62,7 +62,7 @@ export default function CommunityPage() {
           throw new Error("Failed to fetch posts");
         }
         const data: ApiPost[] = await response.json();
-        
+
         const transformedPosts: Post[] = data.map((post) => ({
           id: post._id,
           title: post.title,
@@ -83,7 +83,7 @@ export default function CommunityPage() {
             likes: 0
           })) || []
         }));
-        
+
         setPosts(transformedPosts);
       } catch (error) {
         console.error("Error fetching posts:", error);

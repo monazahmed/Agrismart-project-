@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const About = () => {
   return (
-    <section className="mb-16">
+    <section className="mb-16 mt-2">
       <h1 className="text-4xl font-bold text-center mb-8 text-green-700 dark:text-green-500">
         About AgriSmart
       </h1>
@@ -29,7 +29,7 @@ const About = () => {
             complex data into actionable farming recommendations.
           </p>
         </div>
-        <div className="relative h-[300px] rounded-2xl overflow-hidden">
+        <div className="relative h-[450px] rounded-2xl overflow-hidden">
           <Image
             src={"/about.jpg"}
             alt="Farmers using technology in field"
