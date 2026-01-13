@@ -103,26 +103,14 @@ export default function CropRecommendationPage() {
     setResult(null);
     setCrops([]);
 
-    const prompt = `
-      You are an agricultural expert AI.
-      Given the following values, suggest 3 specific crops to grow, with detailed reasoning:
-      - Soil pH: ${phLevel}
-      - Nitrogen: ${nitrogen} mg/kg
-      - Phosphorus: ${phosphorus} mg/kg
-      - Potassium: ${potassium} mg/kg
-      - Average Temperature: 25°C
-      - Rainfall: 1200mm
-      - Soil Type: Loam
-      
-      Format your response as follows:
-      First, provide a paragraph explaining the soil conditions and why certain crops are suitable.
-      Then, list exactly 3 crop recommendations in this format:
-      • Crop Name: (brief reason why it's suitable)
-      • Crop Name: (brief reason why it's suitable)
-      • Crop Name: (brief reason why it's suitable)
-      
-      Use real crop names appropriate for these conditions.
-    `;
+    const prompt = `You are an agricultural expert. Given this soil data, recommend 3 crops:
+pH: ${phLevel}, Nitrogen: ${nitrogen} mg/kg, Phosphorus: ${phosphorus} mg/kg, Potassium: ${potassium} mg/kg
+
+List 3 crop recommendations with brief reasons why they are suitable for these soil conditions.
+Format: 
+- Crop 1: reason
+- Crop 2: reason  
+- Crop 3: reason`;
 
     try {
       const response = await getCropRecommendationsOllama(prompt);
