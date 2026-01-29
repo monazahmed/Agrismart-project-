@@ -1,0 +1,480 @@
+< !DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AgriSmart Timeline - PNG Generator</title><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1500px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.header {
+    background: linear-gradient(to right, #2c662d, #4a9f5a);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 18px;
+    opacity: 0.9;
+    color: #e0f7e0;
+}
+
+.divider {
+    height: 4px;
+    background-color: #4a9f5a;
+    width: 100%;
+    margin: 10px 0 25px 0;
+    border-radius: 2px;
+}
+
+.controls {
+    background: #f8fafc;
+    padding: 20px;
+    border-bottom: 2px solid #e2e8f0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    padding: 12px 24px;
+    background: #4a9f5a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(74, 159, 90, 0.3);
+}
+
+.btn:hover {
+    background: #3d8a4a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(74, 159, 90, 0.4);
+}
+
+.btn-download {
+    background: #3b82f6;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
+}
+
+.btn-download:hover {
+    background: #2563eb;
+    box-shadow: 0 6px 8px rgba(59, 130, 246, 0.4);
+}
+
+.table-container {
+    background: white;
+    padding: 40px;
+    overflow: auto;
+}
+
+.timeline-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1200px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+thead {
+    background-color: #4a9f5a;
+}
+
+th {
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: white;
+    font-size: 15px;
+    border-right: 1px solid #3d8a4a;
+}
+
+th:last-child {
+    border-right: none;
+}
+
+td {
+    padding: 16px 16px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333;
+    font-size: 14px;
+    vertical-align: top;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.phase-cell {
+    width: 20%;
+    font-weight: 600;
+    color: #2a5d34;
+    background-color: #f8fcf7;
+}
+
+.weeks-cell {
+    width: 10%;
+    color: #666;
+    font-weight: 500;
+    text-align: center;
+}
+
+.date-cell {
+    width: 12%;
+    color: #555;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    text-align: center;
+    background-color: #f0f7f1;
+}
+
+.milestones-cell {
+    width: 46%;
+    color: #444;
+    line-height: 1.5;
+}
+
+.phase-title {
+    font-size: 18px;
+    color: #2c662d;
+    margin-bottom: 8px;
+}
+
+.phase-subtitle {
+    font-size: 14px;
+    color: #5a8f5e;
+    font-style: italic;
+}
+
+.milestone-item {
+    margin-bottom: 8px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.milestone-item:last-child {
+    margin-bottom: 0;
+}
+
+.progress-bar {
+    display: inline-block;
+    width: 120px;
+    height: 12px;
+    background-color: #e0e0e0;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #4a9f5a;
+    border-radius: 6px;
+    display: block;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #666;
+    font-style: italic;
+    font-size: 14px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
+}
+
+tr:hover {
+    background-color: #f8f9fa;
+}
+
+.phase-row {
+    border-top: 2px solid #4a9f5a;
+}
+
+.phase-row:first-child {
+    border-top: none;
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    flex-direction: column;
+    gap: 20px;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #4a9f5a;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.status {
+    text-align: center;
+    padding: 15px;
+    background: #f0fdf4;
+    color: #166534;
+    border-radius: 8px;
+    margin: 15px;
+    display: none;
+    font-weight: 500;
+    border: 2px solid #bbf7d0;
+}
+
+.status.error {
+    background: #fef2f2;
+    color: #991b1b;
+    border-color: #fecaca;
+}
+
+.preview-container {
+    display: none;
+    margin-top: 30px;
+    text-align: center;
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    width: 100%;
+    max-width: 1500px;
+}
+
+.preview-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #111827;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#imagePreview {
+    max-width: 100%;
+    border: 3px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background: white;
+}
+
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .table-container {
+        padding: 20px;
+    }
+
+    .timeline-table {
+        min-width: 1000px;
+    }
+}
+
+</style></head><body><div class="container"><div class="header"><h1>🌾 AgriSmart Project Timeline</h1><p class="subtitle">Complete Development Phases & Milestones</p></div><div class="controls"><button class="btn" onclick="generatePNG()"><span>🎨</span>Generate Timeline Image </button><button class="btn btn-download" onclick="downloadPNG()"><span>💾</span>Download PNG </button></div><div id="status" class="status"></div><div class="table-container"><table class="timeline-table" id="timelineTable"><thead><tr><th>Phase</th><th>Weeks</th><th>Start Date</th><th>End Date</th><th>Milestones & Tasks</th></tr></thead><tbody>< !-- PHASE 1 --><tr class="phase-row"><td class="phase-cell"><div class="phase-title">PHASE 1</div><div class="phase-subtitle">Foundation & Core Setup</div></td><td class="weeks-cell">Weeks 1-4</td><td class="date-cell">2025-01-14</td><td class="date-cell">2025-02-07</td><td class="milestones-cell"><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 80%"></span></span>Project Setup & Architecture </div><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Authentication & Authorization </div><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Basic UI & Navigation </div></td></tr>< !-- PHASE 2 --><tr class="phase-row"><td class="phase-cell"><div class="phase-title">PHASE 2</div><div class="phase-subtitle">Core Features - AI & Detection</div></td><td class="weeks-cell">Weeks 5-12</td><td class="date-cell">2025-02-10</td><td class="date-cell">2025-04-04</td><td class="milestones-cell"><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Crop Recommendation System </div><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Disease Detection System </div><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>AI Chat Assistant </div><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Weather & Market Analysis </div></td></tr>< !-- PHASE 3 --><tr class="phase-row"><td class="phase-cell"><div class="phase-title">PHASE 3</div><div class="phase-subtitle">Community & Marketplace</div></td><td class="weeks-cell">Weeks 13-18</td><td class="date-cell">2025-04-07</td><td class="date-cell">2025-05-16</td><td class="milestones-cell"><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Community Forum & Knowledge Hub </div><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Marketplace - Browse & Details </div><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Marketplace - Shopping & Orders </div></td></tr>< !-- PHASE 4 --><tr class="phase-row"><td class="phase-cell"><div class="phase-title">PHASE 4</div><div class="phase-subtitle">Dashboards & Analytics</div></td><td class="weeks-cell">Weeks 19-21</td><td class="date-cell">2025-05-19</td><td class="date-cell">2025-06-06</td><td class="milestones-cell"><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>User Dashboard </div><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Admin Dashboard </div></td></tr>< !-- PHASE 5 --><tr class="phase-row"><td class="phase-cell"><div class="phase-title">PHASE 5</div><div class="phase-subtitle">Resources & Support</div></td><td class="weeks-cell">Weeks 22-23</td><td class="date-cell">2025-06-09</td><td class="date-cell">2025-06-20</td><td class="milestones-cell"><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Knowledge Base & Resources </div><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Contact & Support System </div></td></tr>< !-- PHASE 6 --><tr class="phase-row"><td class="phase-cell"><div class="phase-title">PHASE 6</div><div class="phase-subtitle">Testing & Optimization</div></td><td class="weeks-cell">Weeks 24-26</td><td class="date-cell">2025-06-23</td><td class="date-cell">2025-07-11</td><td class="milestones-cell"><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Unit & Integration Testing </div><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Performance & Security </div><div class="milestone-item"><span class="progress-bar"><span class="progress-fill" style="width: 100%"></span></span>Bug Fixes & Final QA </div></td></tr></tbody></table><div class="footer">Figure 2: AgriSmart Project Development Timeline with Progress Tracking (Total: 26 Weeks) </div></div></div><div class="preview-container" id="previewContainer"><div class="preview-title"><span>📸</span>Timeline Preview </div><img id="imagePreview" alt="Timeline Preview"></div><div class="loading" id="loading"><div class="loading-spinner"></div><div>Generating high-quality image...</div></div><script>let generatedImageData=null;
+
+async function generatePNG() {
+    try {
+        // Show loading
+        document.getElementById('loading').style.display='flex';
+        showStatus('Generating timeline image...', false);
+
+        // Get the table element
+        const tableElement=document.getElementById('timelineTable');
+        const footerElement=document.querySelector('.footer');
+
+        // Create a temporary container for capture
+        const tempContainer=document.createElement('div');
+        tempContainer.style.position='absolute';
+        tempContainer.style.left='-9999px';
+        tempContainer.style.top='-9999px';
+        tempContainer.style.width='1400px';
+        tempContainer.style.background='white';
+        tempContainer.style.padding='40px';
+        tempContainer.style.borderRadius='8px';
+        tempContainer.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)';
+
+        // Clone the table
+        const clonedTable=tableElement.cloneNode(true);
+        const clonedFooter=footerElement.cloneNode(true);
+
+        // Add some margin to the cloned footer
+        clonedFooter.style.marginTop='25px';
+        clonedFooter.style.padding='15px';
+        clonedFooter.style.background='#f8f9fa';
+        clonedFooter.style.borderTop='1px solid #e0e0e0';
+
+        // Append to temp container
+        tempContainer.appendChild(clonedTable);
+        tempContainer.appendChild(clonedFooter);
+        document.body.appendChild(tempContainer);
+
+        // Wait a moment for rendering
+        await new Promise(resolve=> setTimeout(resolve, 500));
+
+        // Generate canvas
+        const canvas=await html2canvas(tempContainer, {
+            scale: 2,
+            backgroundColor: '#ffffff',
+            useCORS: true,
+            logging: false,
+            allowTaint: true,
+            width: tempContainer.offsetWidth,
+            height: tempContainer.offsetHeight,
+            windowWidth: tempContainer.offsetWidth,
+            windowHeight: tempContainer.offsetHeight
+        });
+
+    // Remove temp container
+    document.body.removeChild(tempContainer);
+
+    // Convert to data URL
+    generatedImageData=canvas.toDataURL('image/png', 1.0);
+
+    // Show preview
+    const preview=document.getElementById('imagePreview');
+    preview.src=generatedImageData;
+    document.getElementById('previewContainer').style.display='block';
+
+    // Hide loading
+    document.getElementById('loading').style.display='none';
+    showStatus('✅ Timeline image generated successfully!', false);
+
+    // Scroll to preview
+    document.getElementById('previewContainer').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+
+}
+
+catch (error) {
+    console.error('Error generating PNG:', error);
+    document.getElementById('loading').style.display='none';
+    showStatus('❌ Error generating image. Please try again.', true);
+}
+}
+
+function downloadPNG() {
+    if ( !generatedImageData) {
+        showStatus('Please generate the image first by clicking "Generate Timeline Image"', true);
+        return;
+    }
+
+    try {
+        const link=document.createElement('a');
+        const timestamp=new Date().toISOString().replace(/[:.]/g, '-');
+
+        link.download=`AgriSmart_Timeline_$ {
+            timestamp
+        }
+
+        .png`;
+        link.href=generatedImageData;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        showStatus('📥 Download started!', false);
+
+    }
+
+    catch (error) {
+        showStatus('❌ Download error: ' + error.message, true);
+    }
+}
+
+function showStatus(message, isError) {
+    const status=document.getElementById('status');
+    status.textContent=message;
+    status.className=isError ? 'status error': 'status';
+    status.style.display='block';
+
+    if ( !isError) {
+        setTimeout(()=> {
+                status.style.display='none';
+            }
+
+            , 5000);
+    }
+}
+
+// Add keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key==='g') {
+            e.preventDefault();
+            generatePNG();
+        }
+
+        if (e.ctrlKey && e.key==='s') {
+            e.preventDefault();
+            downloadPNG();
+        }
+    });
+</script></body></html>
