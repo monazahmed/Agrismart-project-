@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriSmart Project Phases & Milestones</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .divider {
+            height: 4px;
+            background-color: #4a9f5a;
+            width: 100%;
+            margin: 10px 0 25px 0;
+            border-radius: 2px;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1200px;
+        }
+
+        thead {
+            background-color: #4a9f5a;
+        }
+
+        th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: white;
+            font-size: 15px;
+            border-right: 1px solid #3d8a4a;
+        }
+
+        th:last-child {
+            border-right: none;
+        }
+
+        td {
+            padding: 16px 16px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #333;
+            font-size: 14px;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .phase-cell {
+            width: 20%;
+            font-weight: 600;
+            color: #2a5d34;
+            background-color: #f8fcf7;
+        }
+
+        .weeks-cell {
+            width: 10%;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .date-cell {
+            width: 12%;
+            color: #555;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            text-align: center;
+            background-color: #f0f7f1;
+        }
+
+        .milestones-cell {
+            width: 46%;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .phase-title {
+            font-size: 18px;
+            color: #2c662d;
+            margin-bottom: 8px;
+        }
+
+        .phase-subtitle {
+            font-size: 14px;
+            color: #5a8f5e;
+            font-style: italic;
+        }
+
+        .milestone-item {
+            margin-bottom: 8px;
+            padding-left: 5px;
+        }
+
+        .milestone-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .progress-bar {
+            display: inline-block;
+            width: 120px;
+            height: 12px;
+            background-color: #e0e0e0;
+            border-radius: 6px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #4a9f5a;
+            border-radius: 6px;
+            display: block;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+            font-style: italic;
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .phase-row {
+            border-top: 2px solid #4a9f5a;
+        }
+
+        .phase-row:first-child {
+            border-top: none;
+        }
+
+        .date-label {
+            font-size: 12px;
+            color: #777;
+            display: block;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AgriSmart Project Phases & Milestones</h1>
+            <div class="divider"></div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Phase</th>
+                        <th>Weeks</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Milestones & Tasks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- PHASE 1 -->
+                    <tr class="phase-row">
+                        <td class="phase-cell">
+                            <div class="phase-title">PHASE 1</div>
+                            <div class="phase-subtitle">Foundation & Core Setup</div>
+                        </td>
+                        <td class="weeks-cell">Weeks 1-4</td>
+                        <td class="date-cell">2025-01-14</td>
+                        <td class="date-cell">2025-02-07</td>
+                        <td class="milestones-cell">
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill" style="width: 80%"></span></span>
+                                Project Setup & Architecture
+                            </div>
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Authentication & Authorization
+                            </div>
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Basic UI & Navigation
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- PHASE 2 -->
+                    <tr class="phase-row">
+                        <td class="phase-cell">
+                            <div class="phase-title">PHASE 2</div>
+                            <div class="phase-subtitle">Core Features - AI & Detection</div>
+                        </td>
+                        <td class="weeks-cell">Weeks 5-12</td>
+                        <td class="date-cell">2025-02-10</td>
+                        <td class="date-cell">2025-04-04</td>
+                        <td class="milestones-cell">
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Crop Recommendation System
+                            </div>
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Disease Detection System
+                            </div>
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                AI Chat Assistant
+                            </div>
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Weather & Market Analysis
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- PHASE 3 -->
+                    <tr class="phase-row">
+                        <td class="phase-cell">
+                            <div class="phase-title">PHASE 3</div>
+                            <div class="phase-subtitle">Community & Marketplace</div>
+                        </td>
+                        <td class="weeks-cell">Weeks 13-18</td>
+                        <td class="date-cell">2025-04-07</td>
+                        <td class="date-cell">2025-05-16</td>
+                        <td class="milestones-cell">
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Community Forum & Knowledge Hub
+                            </div>
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Marketplace - Browse & Details
+                            </div>
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Marketplace - Shopping & Orders
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- PHASE 4 -->
+                    <tr class="phase-row">
+                        <td class="phase-cell">
+                            <div class="phase-title">PHASE 4</div>
+                            <div class="phase-subtitle">Dashboards & Analytics</div>
+                        </td>
+                        <td class="weeks-cell">Weeks 19-21</td>
+                        <td class="date-cell">2025-05-19</td>
+                        <td class="date-cell">2025-06-06</td>
+                        <td class="milestones-cell">
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                User Dashboard
+                            </div>
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Admin Dashboard
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- PHASE 5 -->
+                    <tr class="phase-row">
+                        <td class="phase-cell">
+                            <div class="phase-title">PHASE 5</div>
+                            <div class="phase-subtitle">Resources & Support</div>
+                        </td>
+                        <td class="weeks-cell">Weeks 22-23</td>
+                        <td class="date-cell">2025-06-09</td>
+                        <td class="date-cell">2025-06-20</td>
+                        <td class="milestones-cell">
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Knowledge Base & Resources
+                            </div>
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Contact & Support System
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- PHASE 6 -->
+                    <tr class="phase-row">
+                        <td class="phase-cell">
+                            <div class="phase-title">PHASE 6</div>
+                            <div class="phase-subtitle">Testing & Optimization</div>
+                        </td>
+                        <td class="weeks-cell">Weeks 24-26</td>
+                        <td class="date-cell">2025-06-23</td>
+                        <td class="date-cell">2025-07-11</td>
+                        <td class="milestones-cell">
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Unit & Integration Testing
+                            </div>
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Performance & Security
+                            </div>
+                            <div class="milestone-item">
+                                <span class="progress-bar"><span class="progress-fill"
+                                        style="width: 100%"></span></span>
+                                Bug Fixes & Final QA
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            Figure 2: AgriSmart Project Development Timeline with Progress Tracking
+        </div>
+    </div>
+</body>
+
+</html>
