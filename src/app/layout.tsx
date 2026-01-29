@@ -3,10 +3,10 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/shared/theme-provider";
 import Navbar from "@/components/layout/navbar";
-import { LanguageProvider } from "@/components/shared/language-provider";
 import Footer from "@/components/layout/footer";
 import { Toaster } from "sonner";
 import AuthProvider from "@/services/auth-provider";
+import { CartProvider } from "@/context/CartContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -28,22 +28,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={poppins.className}>
-        {/* Wrap the entire app with LanguageProvider */}
-        <LanguageProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <AuthProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AuthProvider>
+            <CartProvider>
               <Navbar />
               {children}
               <Toaster />
               <Footer />
-            </AuthProvider>
-          </ThemeProvider>
-        </LanguageProvider>
+            </CartProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

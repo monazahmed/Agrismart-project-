@@ -12,6 +12,7 @@ import {
   LogOut,
   ChevronDown,
   LayoutDashboard,
+  ShoppingCart,
 } from "lucide-react";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import {
@@ -24,12 +25,14 @@ import {
 import { signOut, useSession } from "next-auth/react";
 import { toast } from "sonner";
 import Image from "next/image";
+import { useCart } from "@/context/CartContext";
 
 const navigation = [
   { name: "Home", href: "/" },
+  { name: "Marketplace", href: "/marketplace" },
   { name: "Community", href: "/community" },
   { name: "Knowledge Hub", href: "/knowledge-hub" },
-  { name: "About", href: "/about" },
+  { name: "About Us", href: "/about" },
 ];
 
 export default function Navbar() {
@@ -37,6 +40,8 @@ export default function Navbar() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();
+  const { getTotalItems } = useCart();
+  const totalItems = getTotalItems();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,11 +64,10 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
-        isScrolled
-          ? "bg-white/80 dark:bg-gray-950/80 backdrop-blur-md shadow-sm"
-          : "bg-white dark:bg-gray-950"
-      }`}
+      className={`sticky top-0 z-50 w-full transition-all duration-200 ${isScrolled
+        ? "bg-white/80 dark:bg-gray-950/80 backdrop-blur-md shadow-sm"
+        : "bg-white dark:bg-gray-950"
+        }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
@@ -81,13 +85,12 @@ export default function Navbar() {
           <nav className="hidden lg:flex items-center gap-6">
             {navigation.map((item) => (
               <Link
-                key={item.name}
+                key={item.href}
                 href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-green-700 dark:hover:text-green-500 ${
-                  pathname === item.href
-                    ? "text-green-700 dark:text-green-500"
-                    : "text-gray-600 dark:text-gray-300"
-                }`}
+                className={`text-sm font-medium transition-colors hover:text-green-700 dark:hover:text-green-500 ${pathname === item.href
+                  ? "text-green-700 dark:text-green-500"
+                  : "text-gray-600 dark:text-gray-300"
+                  }`}
               >
                 {item.name}
               </Link>
@@ -98,6 +101,16 @@ export default function Navbar() {
             {/* Dark Mode Toggle and Cart Button (Desktop) */}
             <div className="hidden lg:flex items-center gap-2">
               <ModeToggle />
+
+
+              <Link href="/marketplace/cart" className="relative p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition">
+                <ShoppingCart size={20} className="text-gray-700 dark:text-gray-300" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
+              </Link>
               {session?.user ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -113,7 +126,7 @@ export default function Navbar() {
                         className="flex items-center cursor-pointer"
                       >
                         <User className="mr-2 h-4 w-4" />
-                        <span>Profile</span>
+                        <span>My Profile</span>
                         <span className="ml-auto text-xs text-muted-foreground">
                           Ctrl+P
                         </span>
@@ -139,7 +152,7 @@ export default function Navbar() {
                         className="flex items-center cursor-pointer text-red-500 dark:text-red-400 w-full justify-start"
                       >
                         <LogOut className="mr-2 h-4 w-4" />
-                        <span>Sign out</span>
+                        <span>Logout</span>
                       </Button>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -157,6 +170,14 @@ export default function Navbar() {
             {/* Mobile Menu */}
             <div className="lg:hidden flex items-center gap-2">
               <ModeToggle />
+              <Link href="/marketplace/cart" className="relative p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition">
+                <ShoppingCart size={20} className="text-gray-700 dark:text-gray-300" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
+              </Link>
               <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon">
@@ -196,11 +217,10 @@ export default function Navbar() {
                           key={item.name}
                           href={item.href}
                           onClick={() => setIsSheetOpen(false)} // Close the sheet on link click
-                          className={`text-lg font-medium transition-colors hover:text-green-700 dark:hover:text-green-500 ${
-                            pathname === item.href
-                              ? "text-green-700 dark:text-green-500"
-                              : "text-gray-600 dark:text-gray-300"
-                          }`}
+                          className={`text-lg font-medium transition-colors hover:text-green-700 dark:hover:text-green-500 ${pathname === item.href
+                            ? "text-green-700 dark:text-green-500"
+                            : "text-gray-600 dark:text-gray-300"
+                            }`}
                         >
                           {item.name}
                         </Link>
