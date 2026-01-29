@@ -45,50 +45,38 @@ export default function CropRecommendationPage() {
   const parseCropRecommendations = (aiResponse: string): CropRecommendation[] => {
     const crops: CropRecommendation[] = [];
 
-    // Split response into lines
-    const lines = aiResponse.split('\n').filter(line => line.trim());
+    // Remove code blocks from response
+    const cleanResponse = aiResponse.replace(/```[\s\S]*?```/g, '');
 
-    // Look for crop names and descriptions in bullet points or numbered lists
-    const cropMatches = aiResponse.match(/(?:•|-|\*|1\.|2\.|3\.)\s*\*?\*?(\w+(?:\s+\w+)?)\*?\*?:?\s*([^•\n\-\*]*)(?:•|$|-|$|\*|$)/gi) || [];
+    // Look for numbered crop entries (1. Crop Name - Match Level...)
+    const numberedPattern = /(\d+)\.\s*\*?\*?([^-*]+?)\*?\*?\s*[-–]\s*Match Level:\s*(High|Good|Moderate)[\s\S]*?Why suitable:\s*([^0-9]*?)(?=\n\d+\.|$)/gi;
 
-    if (cropMatches.length === 0) {
-      // Fallback: look for common crop names mentioned in the text
+    let match;
+    while ((match = numberedPattern.exec(cleanResponse)) !== null) {
+      const cropName = match[2].replace(/[\*_`]/g, '').trim();
+      const matchLevel = match[3].trim() + " match";
+      const reason = match[4].replace(/[\*_`]/g, '').trim().split('\n')[0];
+
+      if (cropName && cropName.length > 1) {
+        crops.push({
+          name: cropName,
+          matchLevel: matchLevel,
+          reason: reason || "Suitable for your soil conditions"
+        });
+      }
+    }
+
+    // Fallback: look for common crop names if parsing fails
+    if (crops.length === 0) {
       const commonCrops = ['wheat', 'rice', 'corn', 'maize', 'soybeans', 'pulses', 'lentils', 'chickpeas', 'barley', 'oats', 'bajra', 'jowar', 'groundnut', 'cotton', 'sugarcane', 'potato', 'tomato', 'onion', 'cabbage', 'carrot', 'cucumber', 'brinjal', 'chili', 'pepper'];
 
       commonCrops.forEach(crop => {
-        if (aiResponse.toLowerCase().includes(crop)) {
-          const matchLevel = aiResponse.toLowerCase().indexOf(crop.toLowerCase()) < 200 ? "High match" : "Good match";
+        if (cleanResponse.toLowerCase().includes(crop)) {
+          const matchLevel = cleanResponse.toLowerCase().indexOf(crop.toLowerCase()) < 300 ? "High match" : "Good match";
           crops.push({
             name: crop.charAt(0).toUpperCase() + crop.slice(1),
             matchLevel: matchLevel,
             reason: `Suitable for your soil and climate conditions`
-          });
-        }
-      });
-    } else {
-      cropMatches.forEach((match, index) => {
-        const cropName = match.replace(/(?:•|-|\*|1\.|2\.|3\.)\s*\*?\*?|\*?\*?:?.*/gi, '').trim();
-        if (cropName) {
-          crops.push({
-            name: cropName,
-            matchLevel: index === 0 ? "High match" : index === 1 ? "Good match" : "Moderate match",
-            reason: `Recommended based on your soil and climate data`
-          });
-        }
-      });
-    }
-
-    // If still no crops found, extract any capitalized words that might be crop names
-    if (crops.length === 0) {
-      const capitalizedWords = aiResponse.match(/\b([A-Z][a-z]+)\b/g) || [];
-      const cropKeywords = ['crop', 'recommendation', 'based', 'soil', 'climate', 'suitable', 'excellent', 'good', 'best', 'suggested'];
-
-      capitalizedWords.slice(0, 3).forEach((word, index) => {
-        if (!cropKeywords.includes(word.toLowerCase())) {
-          crops.push({
-            name: word,
-            matchLevel: index === 0 ? "High match" : "Good match",
-            reason: 'Recommended based on your soil and climate data'
           });
         }
       });
@@ -103,14 +91,32 @@ export default function CropRecommendationPage() {
     setResult(null);
     setCrops([]);
 
-    const prompt = `You are an agricultural expert. Given this soil data, recommend 3 crops:
-pH: ${phLevel}, Nitrogen: ${nitrogen} mg/kg, Phosphorus: ${phosphorus} mg/kg, Potassium: ${potassium} mg/kg
+    const prompt = `You are an agricultural expert. Based on the following soil data, recommend exactly 3 crops that would be most suitable.
 
-List 3 crop recommendations with brief reasons why they are suitable for these soil conditions.
-Format: 
-- Crop 1: reason
-- Crop 2: reason  
-- Crop 3: reason`;
+SOIL DATA:
+- pH Level: ${phLevel}
+- Nitrogen: ${nitrogen} mg/kg
+- Phosphorus: ${phosphorus} mg/kg
+- Potassium: ${potassium} mg/kg
+
+INSTRUCTIONS:
+1. Provide ONLY crop recommendations in the format below
+2. Do NOT include any Python code, formulas, or technical explanations
+3. Each recommendation should be clear and concise
+
+FORMAT:
+**Recommended Crops for Your Soil:**
+
+1. **Crop Name** - Match Level: High/Good/Moderate
+   Why suitable: Brief explanation why this crop thrives in your soil conditions
+
+2. **Crop Name** - Match Level: High/Good/Moderate
+   Why suitable: Brief explanation why this crop thrives in your soil conditions
+
+3. **Crop Name** - Match Level: High/Good/Moderate
+   Why suitable: Brief explanation why this crop thrives in your soil conditions
+
+Start with the recommendation now:`;
 
     try {
       const response = await getCropRecommendationsOllama(prompt);

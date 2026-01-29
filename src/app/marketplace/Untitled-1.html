@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriSmart Project Schedule</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            color: #333;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        th {
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #495057;
+            border-right: 1px solid #dee2e6;
+            font-size: 14px;
+        }
+
+        th:last-child {
+            border-right: none;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dee2e6;
+            color: #333;
+            font-size: 14px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .task-cell {
+            width: 50%;
+            font-weight: 500;
+        }
+
+        .date-cell {
+            width: 25%;
+            color: #666;
+            font-family: 'Courier New', monospace;
+        }
+
+        .year-header {
+            background-color: #6c757d;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AgriSmart Project Schedule</h1>
+        </div>
+
+        <div class="table-container">
+            <div class="year-header">2025</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Start</th>
+                        <th>End</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="task-cell">Agricultural Literature Review</td>
+                        <td class="date-cell">2025-01-14</td>
+                        <td class="date-cell">2025-02-06</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">Identifying Agri-Tech Research Gaps</td>
+                        <td class="date-cell">2025-01-22</td>
+                        <td class="date-cell">2025-02-26</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">Define AgriSmart Objectives</td>
+                        <td class="date-cell">2025-02-10</td>
+                        <td class="date-cell">2025-03-03</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">Field Trial Planning</td>
+                        <td class="date-cell">2025-02-19</td>
+                        <td class="date-cell">2025-03-24</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">Agricultural Dataset Collection</td>
+                        <td class="date-cell">2025-03-12</td>
+                        <td class="date-cell">2025-04-16</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">Crop Testing & Adjustments</td>
+                        <td class="date-cell">2025-04-15</td>
+                        <td class="date-cell">2025-05-16</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">Progress Assessment</td>
+                        <td class="date-cell">2025-05-06</td>
+                        <td class="date-cell">2025-07-21</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">Final Agricultural Dataset</td>
+                        <td class="date-cell">2025-06-16</td>
+                        <td class="date-cell">2025-08-25</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">Crop Prediction Model Building</td>
+                        <td class="date-cell">2025-07-07</td>
+                        <td class="date-cell">2025-09-01</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">Model Accuracy Testing</td>
+                        <td class="date-cell">2025-07-28</td>
+                        <td class="date-cell">2025-09-05</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">Farm Dashboard Development</td>
+                        <td class="date-cell">2025-08-04</td>
+                        <td class="date-cell">2025-10-23</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">System Integration Testing</td>
+                        <td class="date-cell">2025-08-28</td>
+                        <td class="date-cell">2025-10-24</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">Agricultural Use Case Building</td>
+                        <td class="date-cell">2025-09-15</td>
+                        <td class="date-cell">2025-11-17</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">Final Report Writing</td>
+                        <td class="date-cell">2025-10-27</td>
+                        <td class="date-cell">2025-11-27</td>
+                    </tr>
+                    <tr>
+                        <td class="task-cell">Farmer Presentation Preparation</td>
+                        <td class="date-cell">2025-11-17</td>
+                        <td class="date-cell">2025-12-26</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            Figure 1: AgriSmart Project Timeline
+        </div>
+    </div>
+</body>
+
+</html>
